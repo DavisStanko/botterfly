@@ -1,0 +1,15 @@
+{
+  "name": "botterfly",
+  "description": "My instance of this bot is currently hosted on a VPS with a low bandwidth cap and as such it is only availible for private use. Please contact me if you are interested in trying this bot in your server. Feel free, to fork this program for your own bot instance instead.",
+  "version": "1.0.0",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Davis Stanko",
+  "license": "GPLv3",
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1"
+  }
+}
