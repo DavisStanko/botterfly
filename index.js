@@ -2,10 +2,6 @@ require('dotenv').config(); // Load variables from .env file
 
 // Access the variables
 const token = process.env.DISCORD_TOKEN;
-const weatherApiKey = process.env.WEATHER_API_KEY;
-const newsApiKey = process.env.NEWS_API_KEY;
-const redditClientId = process.env.REDDIT_CLIENT_ID;
-const redditClientSecret = process.env.REDDIT_CLIENT_SECRET;
 
 // Require the necessary discord.js classes
 const fs = require('node:fs');
