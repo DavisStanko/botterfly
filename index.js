@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 
-// Load variables from .env file
+// Load .env file
 require('dotenv').config();
 const token = process.env.DISCORD_TOKEN
 
