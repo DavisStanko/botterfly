@@ -1,12 +1,11 @@
-require('dotenv').config(); // Load variables from .env file
-
-// Access the variables
-const token = process.env.DISCORD_TOKEN;
-
 // Require the necessary discord.js classes
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+
+// Load variables from .env file
+require('dotenv').config();
+const token = process.env.DISCORD_TOKEN
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
