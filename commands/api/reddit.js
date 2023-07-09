@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('reddit')
-		.setDescription('Replies with a random meme!')
+		.setDescription('Replies with a random post from the specified subreddit')
 		.addStringOption(option =>
 			option.setName('subreddit')
 				.setDescription('The subreddit to get the meme from')
