@@ -12,6 +12,7 @@ All commands are slash commands and can be found by typing `/` in the chat. Typi
 - `/points` - Check your current points.
 - `/leaderboard` - See the top users and their points.
 - `/income` - Claim free points every 30 minutes.
+- `/give` - Give points to another user.
 
 ### Game Commands
 
