@@ -30,6 +30,7 @@ All commands are slash commands and can be found by typing `/` in the chat. Typi
 
 - `/help` - Show a list of all commands.
 - `/info` - Show information about the bot.
+- `/invite` - Get an invite link for the bot.
 
 ## History
 
