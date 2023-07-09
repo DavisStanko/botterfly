@@ -9,6 +9,8 @@ module.exports = {
         const commands = interaction.client.commands;
         // Create an array of command names
         const commandNames = commands.map(command => command.data.name);
+        // Alphabatize the array
+        commandNames.sort();
         // Create a string with the command names
         const commandList = commandNames.join('\n');
         // Reply with the command list
