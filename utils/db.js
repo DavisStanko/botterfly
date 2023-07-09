@@ -51,20 +51,24 @@ function addUser(username, userID, points) {
 
 // Get the points of a user
 function getPoints(userID) {
-    // Check if the user exists
-    const userExists = checkUserIDExists(userID);
-    // If the user doesn't exist, return
-    if (!userExists) {
-        return null;
-    }
-    // If the user exists, get their points
-    const points = db.get('SELECT points FROM points WHERE userID = ?', [userID], (err, row) => {
-        if (err) {
-            throw err;
+    return new Promise((resolve, reject) => {
+        // Check if the user exists
+        const userExists = checkUserIDExists(userID);
+        // If the user doesn't exist, resolve with null
+        if (!userExists) {
+            resolve(null);
+            return;
         }
-        return row.points;
-    });
-    return points;
+        // If the user exists, get their points
+        db.get('SELECT points FROM points WHERE userID = ?', [userID], (err, row) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(row ? row.points : null);
+        });
+    }
+    );
 }
 
 // Add points to a user

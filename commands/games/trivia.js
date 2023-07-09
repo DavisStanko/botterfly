@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { checkUserIDExists } = require('../../utils/db.js');
 const { addPoints } = require('../../utils/db.js');
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
@@ -22,6 +23,13 @@ module.exports = {
         .setDescription('Play trivia!'),
     async execute(interaction) {
         const userID = interaction.user.id;
+        // Check if the user exists
+        const userExists = await checkUserIDExists(userID);
+        // If the user doesn't exist, return
+        if (!userExists) {
+            await interaction.reply("You don't have an account! Please run the `start` command.");
+            return;
+        }
         const response = await fetch('https://opentdb.com/api.php?amount=1&type=multiple');
         const data = await response.json();
         let question = data.results[0].question;

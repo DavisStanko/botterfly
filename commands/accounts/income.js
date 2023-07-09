@@ -11,6 +11,10 @@ module.exports = {
         const userID = interaction.user.id;
         try {
             const incomeTimestamp = await getIncomeTimestamp(userID);
+            if (!incomeTimestamp) {
+                await interaction.reply("You don't have an account! Please run the `start` command.");
+                return;
+            }
             const now = Date.now();
             const timeDifference = now - incomeTimestamp;
             const minutesPassed = Math.floor(timeDifference / 60000);

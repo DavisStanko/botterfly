@@ -13,6 +13,11 @@ module.exports = {
     async execute(interaction) {
         const userID = interaction.user.id;
         const points = interaction.options.getInteger('points');
+        // If the user doesn't exist, return
+        if (!points) {
+            await interaction.reply("You don't have an account! Please run the `start` command.");
+            return;
+        }
         const userPoints = await getPoints(userID);
         if (points > userPoints) {
             await interaction.reply({ content: 'You don\'t have enough points!', ephemeral: true });
