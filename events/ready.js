@@ -1,4 +1,8 @@
 const { Events } = require('discord.js');
+const sqlite3 = require('sqlite3').verbose();
+
+const dbFilePath = './points.db';
+const db = new sqlite3.Database(dbFilePath);
 
 module.exports = {
 	name: Events.ClientReady,
@@ -11,5 +15,7 @@ module.exports = {
         const guildsAndIds = guilds.map((guild, index) => `${guild} (${guildIds[index]})`);
         // log connected guilds and ids
         console.log(`Connected to: ${guildsAndIds.join(', ')}`);
+        // create points table if it doesn't exist
+        db.run('CREATE TABLE IF NOT EXISTS points (username TEXT, userID TEXT, points INTEGER, incomeTimestamp INTEGER)');
     },
 };
