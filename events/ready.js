@@ -14,7 +14,7 @@ module.exports = {
         const guildIds = client.guilds.cache.map(guild => guild.id);
         const guildsAndIds = guilds.map((guild, index) => `${guild} (${guildIds[index]})`);
         // log connected guilds and ids
-        console.log(`Connected to:n\n${guildsAndIds.join('\n')}`);
+        console.log(`Connected to:\n${guildsAndIds.join('\n')}`);
         // create points table if it doesn't exist
         db.run('CREATE TABLE IF NOT EXISTS points (username TEXT, userID TEXT, points INTEGER, incomeTimestamp INTEGER)');
     },
