@@ -16,32 +16,23 @@ module.exports = {
 	async execute(interaction) {
 		const userID = interaction.user.id;
 		const points = await getPoints(userID);
-        // If the user doesn't exist, return
-		if (!points) {
-			await interaction.reply("You don't have an account! Please run the `start` command.");
-			return;
-		}
-        // Get the user to give points to
-        const user = interaction.options.getUser('user');
-        // Get the amount of points to give
+        const recipient = interaction.options.getUser('user');
         const amount = interaction.options.getInteger('amount');
-        // If the user doesn't exist, return
-        if (!user) {
-            await interaction.reply("That user doesn't have an account!");
-            return;
+        // Check if recipient has an account
+        if (!await getPoints(recipient.id)) {
+            return interaction.reply({ content: 'That user does not have an account!', ephemeral: true });
         }
-        // If the amount is less than 1, return
-        if (amount < 1) {
-            await interaction.reply("Please give at least 1 point!");
-            return;
+        // Check if user has enough points
+        if (points < amount) {
+            return interaction.reply({ content: 'You do not have enough points!', ephemeral: true });
         }
-        // If the user is the same as the giver, return
-        if (user.id === userID) {
-            await interaction.reply("You can't give points to yourself!");
-            return;
+        // Check if amount is positive
+        if (amount <= 0) {
+            return interaction.reply({ content: 'You must give a positive amount of points!', ephemeral: true });
         }
-        // Give the points
-        await addPoints(user.id, amount);
-        await interaction.reply(`You gave ${amount} points to ${user.username}!`);
+        // Give points
+        await addPoints(userID, -amount);
+        await addPoints(recipient.id, amount);
+        return interaction.reply({ content: `You gave ${recipient.username} ${amount} points!`, ephemeral: true });
     },
 };
