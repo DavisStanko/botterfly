@@ -6,6 +6,7 @@ const path = require('node:path');
 
 const token = process.env.DISCORD_TOKEN;
 const clientId = process.env.DISCORD_CLIENT_ID;
+const testGuildID = process.env.DISCORD_TEST_GUILD_ID;
 
 const commands = [];
 // Grab all the command files from the commands directory you created earlier
@@ -38,7 +39,7 @@ const rest = new REST().setToken(token);
 
 		// The put method is used to fully refresh all commands in the guild with the current set
 		const data = await rest.put(
-            Routes.applicationCommands(clientId),
+            Routes.applicationCommands(clientId, testGuildID),
 			{ body: commands },
 		);
 
