@@ -1,4 +1,6 @@
-# Discord-Bot
+# Botterfly
+
+Botterfly is a versatile Discord bot with a range of commands from games and gambling to memes and weather updates. Botterfly puts entertainment and useful information at your fingertips. Earn points, compete with friends on the leaderboard, and enjoy the various features this bot has to offer for free!
 
 Invite Botterfly to your server: [Invite Link](https://discord.com/oauth2/authorize?client_id=1126575982216757269&permissions=2147502080&scope=bot)
 
