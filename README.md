@@ -1,6 +1,6 @@
 # Discord-Bot
 
-Invite Botterfly to your server: [Invite Link](https://discord.com/oauth2/authorize?client_id=1126575982216757269&permissions=2147502080&scope=bot)
+Botterfly is currently not maintained and is no longer availible for public use. Discord's API is ever changing and I don't have the time to keep up with it. If you would like to contribute to this project, please feel free to fork it and make a pull request.
 
 ## Usage
 
