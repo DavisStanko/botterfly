@@ -1,165 +1,173 @@
-const sqlite3 = require('sqlite3').verbose();
+const sqlite3 = require("sqlite3").verbose();
 
 // Load the points database
-const pointsDB = './points.db';
+const pointsDB = "./points.db";
 
 // Create a new database object
 const db = new sqlite3.Database(pointsDB);
 
 function checkUserIDExists(userID) {
-    return new Promise((resolve, reject) => {
-        // Get all user IDs from the database
-        db.all('SELECT userID FROM points', (err, rows) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            const userIDs = rows.map(row => row.userID);
-            // Check if the user ID exists in the database
-            const userIDExists = userIDs.includes(userID);
-            resolve(userIDExists);
-        });
-    });
+  return new Promise((resolve, reject) => {
+    // Get user directly instead of fetching all users
+    db.get(
+      "SELECT userID FROM points WHERE userID = ?",
+      [userID],
+      (err, row) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(!!row); // Convert to boolean
+      }
+    );
+  });
 }
 
 // Add user to the database
 function addUser(username, userID, points) {
-    return new Promise((resolve, reject) => {
-        // Check if the user already exists
-        checkUserIDExists(userID)
-            .then(userExists => {
-                // If the user already exists, return
-                if (userExists) {
-                    resolve("User already exists!");
-                    return;
-                }
-                // If the user doesn't exist, add them to the database
-                db.run('INSERT INTO points (username, userID, points, incomeTimestamp) VALUES (?, ?, ?, ?)', [username, userID, points, 0], (err) => {
-                    if (err) {
-                        reject(err);
-                        return;
-                    }
-                    resolve("User added to database!");
-                });
-            })
-            .catch(err => {
-                // Handle any errors that occurred during the operation
-                reject(err);
-            });
-    });
-}``
+  return new Promise((resolve, reject) => {
+    // Check if the user already exists
+    checkUserIDExists(userID)
+      .then((userExists) => {
+        // If the user already exists, return
+        if (userExists) {
+          resolve("User already exists!");
+          return;
+        }
+        // If the user doesn't exist, add them to the database
+        db.run(
+          "INSERT INTO points (username, userID, points, incomeTimestamp) VALUES (?, ?, ?, ?)",
+          [username, userID, points, 0],
+          (err) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve("User added to database!");
+          }
+        );
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
 
 // Get the points of a user
-function getPoints(userID) {
-    return new Promise((resolve, reject) => {
-        // Check if the user exists
-        const userExists = checkUserIDExists(userID);
-        // If the user doesn't exist, resolve with null
-        if (!userExists) {
-            resolve(null);
-            return;
+async function getPoints(userID) {
+  return new Promise((resolve, reject) => {
+    db.get(
+      "SELECT points FROM points WHERE userID = ?",
+      [userID],
+      (err, row) => {
+        if (err) {
+          reject(err);
+          return;
         }
-        // If the user exists, get their points
-        db.get('SELECT points FROM points WHERE userID = ?', [userID], (err, row) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve(row ? row.points : null);
-        });
-    }
+        resolve(row ? row.points : null);
+      }
     );
+  });
 }
 
 // Add points to a user
-function addPoints(userID, pointsToAdd) {
-    return new Promise((resolve, reject) => {
-        // Check if the user exists
-        const userExists = checkUserIDExists(userID);
-        // If the user doesn't exist, return
-        if (!userExists) {
-            return;
+async function addPoints(userID, pointsToAdd) {
+  const userExists = await checkUserIDExists(userID);
+  if (!userExists) {
+    return Promise.reject("User does not exist");
+  }
+
+  return new Promise((resolve, reject) => {
+    db.run(
+      "UPDATE points SET points = points + ? WHERE userID = ?",
+      [pointsToAdd, userID],
+      (err) => {
+        if (err) {
+          reject(err);
+          return;
         }
-        // If the user exists, add points to their account
-        db.run('UPDATE points SET points = points + ? WHERE userID = ?', [pointsToAdd, userID], (err) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve("Points added!");
-        });
-    });
+        resolve("Points added!");
+      }
+    );
+  });
 }
 
 // Get the income timestamp of a user
 async function getIncomeTimestamp(userID) {
-    return new Promise((resolve, reject) => {
-      // Check if the user exists
-      const userExists = checkUserIDExists(userID);
-      // If the user doesn't exist, resolve with null
-      if (!userExists) {
-        resolve(null);
-        return;
-      }
-      // If the user exists, get their income timestamp
-      db.get('SELECT incomeTimestamp FROM points WHERE userID = ?', [userID], (err, row) => {
+  const userExists = await checkUserIDExists(userID);
+  if (!userExists) {
+    return null;
+  }
+
+  return new Promise((resolve, reject) => {
+    db.get(
+      "SELECT incomeTimestamp FROM points WHERE userID = ?",
+      [userID],
+      (err, row) => {
         if (err) {
           reject(err);
           return;
         }
         resolve(row ? row.incomeTimestamp : null);
-      });
-    });
-  }
+      }
+    );
+  });
+}
 
 // Update the income timestamp of a user
-function updateIncomeTimestamp(userID, incomeTimestamp) {
-    return new Promise((resolve, reject) => {
-        // Check if the user exists
-        const userExists = checkUserIDExists(userID);
-        // If the user doesn't exist, return
-        if (!userExists) {
-            return;
+async function updateIncomeTimestamp(userID, incomeTimestamp) {
+  const userExists = await checkUserIDExists(userID);
+  if (!userExists) {
+    return Promise.reject("User does not exist");
+  }
+
+  return new Promise((resolve, reject) => {
+    db.run(
+      "UPDATE points SET incomeTimestamp = ? WHERE userID = ?",
+      [incomeTimestamp, userID],
+      (err) => {
+        if (err) {
+          reject(err);
+          return;
         }
-        // If the user exists, update their income timestamp
-        db.run('UPDATE points SET incomeTimestamp = ? WHERE userID = ?', [incomeTimestamp, userID], (err) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve("Income timestamp updated!");
-        });
-    });
+        resolve("Income timestamp updated!");
+      }
+    );
+  });
 }
 
 // Leaderboard
 async function getLeaderboard(numberOfUsers) {
-    return new Promise((resolve, reject) => {
-        db.all('SELECT username, points FROM points ORDER BY points DESC LIMIT ?', [numberOfUsers], (err, rows) => {
-            if (err) {
-                reject(err);
-                return;
-            }
+  return new Promise((resolve, reject) => {
+    db.all(
+      "SELECT username, points FROM points ORDER BY points DESC LIMIT ?",
+      [numberOfUsers],
+      (err, rows) => {
+        if (err) {
+          reject(err);
+          return;
+        }
 
-            let leaderboard = '';
-            for (let i = 0; i < rows.length; i++) {
-                const user = rows[i];
-                const username = user.username;
-                const points = user.points;
-                leaderboard += `${i + 1}. ${username}: ${points} points\n`;
-            }
+        let leaderboard = "";
+        for (let i = 0; i < rows.length; i++) {
+          const user = rows[i];
+          const username = user.username;
+          const points = user.points;
+          leaderboard += `${i + 1}. ${username}: ${points} points\n`;
+        }
 
-            resolve(leaderboard);
-        });
-    });
+        resolve(leaderboard);
+      }
+    );
+  });
 }
 
 module.exports = {
-    checkUserIDExists,
-    addUser,
-    getPoints,
-    addPoints,
-    getIncomeTimestamp,
-    getLeaderboard,
-    updateIncomeTimestamp
+  checkUserIDExists,
+  addUser,
+  getPoints,
+  addPoints,
+  getIncomeTimestamp,
+  getLeaderboard,
+  updateIncomeTimestamp,
 };
