@@ -1,6 +1,6 @@
 # Discord-Bot
 
-Botterfly is currently not maintained and is no longer available for public use. Discord's API is ever changing and I don't have the time to keep up with it. If you would like to contribute to this project, please feel free to fork it and make a pull request.
+Botterfly is a Discord bot focused on fun and games! To add it to your server, [click here](https://discord.com/oauth2/authorize?client_id=1340496200952057866&permissions=2147483648&integration_type=0&scope=bot).
 
 ## Usage
 
@@ -37,6 +37,33 @@ All commands are slash commands and can be found by typing `/` in the chat. Typi
 ## History
 
 This project was originally created in 2018 as a way to learn Python and as such it was made with `Discord.py`. I have since rewritten it in `Discord.js` due to it's more active development and better documentation. The original repo can be found here: [DavisStanko/Discord-Bot](https://github.com/DavisStanko/Discord-Bot)
+
+## Self Hosting
+
+If you'd like to run your own instance of the bot, you can fork this repository and host it yourself. The bot can be run using PM2 for process management:
+
+1. Install PM2 globally:
+
+```bash
+npm install pm2 -g
+```
+
+2. Start the bot:
+
+```bash
+pm2 start index.js --name "discord-bot"
+```
+
+3. Other useful PM2 commands:
+
+```bash
+pm2 status              # Check status of all processes
+pm2 logs discord-bot    # View bot logs
+pm2 restart discord-bot # Restart the bot
+pm2 stop discord-bot    # Stop the bot
+```
+
+Feel free to fork this project and make your own modifications. Contributions are welcome through pull requests!
 
 ## License
 
