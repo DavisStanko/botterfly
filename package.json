@@ -9,7 +9,6 @@
   "author": "Davis Stanko",
   "license": "GPLv3",
   "dependencies": {
-    "cors": "^2.8.5",
     "discord.js": "^14.11.0",
     "dotenv": "^16.3.1",
     "jsdom": "^22.1.0",
