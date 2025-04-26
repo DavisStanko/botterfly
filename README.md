@@ -65,6 +65,15 @@ pm2 stop discord-bot    # Stop the bot
 
 Feel free to fork this project and make your own modifications. Contributions are welcome through pull requests!
 
+### Bot Stats API
+
+When the bot is running, it also hosts a small web server on port 3001.
+You can access bot statistics (such as the number of servers and users) by making a GET request to:
+
+http://<your-server-ip>:3001/botstats
+
+This endpoint returns a JSON object.
+
 ## License
 
 This project is licensed under the [GPL-3.0](LICENSE.md)
