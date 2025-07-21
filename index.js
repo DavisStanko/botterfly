@@ -50,8 +50,15 @@ for (const file of eventFiles) {
 
 // Express server setup
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const PORT = 3001;
+
+app.use(cors({
+  origin: 'https://davisstanko.com',
+  methods: ['GET'],
+  credentials: false
+}));
 
 let botStats = { guilds: 0, users: 0 };
 
@@ -74,8 +81,8 @@ client.once("ready", () => {
   updateBotStats();
   setInterval(updateBotStats, 60 * 60 * 1000);
 
-  app.listen(PORT, () => {
-    console.log(`Stats server listening on port ${PORT}`);
+  app.listen(PORT, '127.0.0.1', () => {
+    console.log(`Stats server listening on http://127.0.0.1:${PORT}`);
   });
 });
 
