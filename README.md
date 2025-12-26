@@ -1,6 +1,6 @@
 # Discord-Bot
 
-Botterfly is a Discord bot focused on fun and games! To add it to your server, [click here](https://discord.com/oauth2/authorize?client_id=1340496200952057866&permissions=2147483648&integration_type=0&scope=bot).
+Botterfly is a Discord bot focused on fun, games, and utility. Please note: The official hosted version is no longer online. This repository is now maintained as an open-source project for those who wish to host their own instance or learn from the codebase.
 
 ## Usage
 
