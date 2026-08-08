@@ -1,46 +1,44 @@
 # Botterfly
 
-Botterfly is a Discord bot focused on fun, games, and utility. Please note: The official hosted version is no longer online. This repository is now maintained as an open-source project for those who wish to host their own instance or learn from the codebase.
+Versatile Discord bot with extensive commands for entertainment and utility. Features a competitive economy system, minigames, and real-time data fetching.
 
-## Usage
+Note: the official hosted version is no longer online. This repository is now maintained as an open-source project, for anyone who wants to host their own instance or learn from the codebase.
 
-All commands are slash commands and can be found by typing `/` in the chat. Typing `/help` will show a list of all commands and their usage.
+## How to use
+
+All commands are slash commands. Type `/` in a Discord chat to find them. Type `/help` to see a list of all commands and their usage.
 
 ### Account Commands
 
-- `/start` - Create a new account. Run this command before any other commands.
-- `/points` - Check your current points.
-- `/leaderboard` - See the top users and their points.
-- `/income` - Claim free points every 30 minutes.
-- `/give` - Give points to another user.
+- `/start` — create a new account. Run this before any other commands.
+- `/points` — check your current points.
+- `/leaderboard` — see the top users and their points.
+- `/income` — claim free points every 30 minutes.
+- `/give` — give points to another user.
 
 ### Game Commands
 
-- `/trivia` - Start a trivia game. Win points by answering questions correctly.
-- `/roulette` - Wager points on a game of roulette.
-- `/slots` - Wager points on a game of 3 column slots.
-- `/roll` - Roll dice in the format `#d#` (ex. `1d6`).
+- `/trivia` — start a trivia game. Win points by answering questions correctly.
+- `/roulette` — wager points on a game of roulette.
+- `/slots` — wager points on a game of 3-column slots.
+- `/roll` — roll dice in the format `#d#` (example: `1d6`).
 
 ### API Commands
 
-- `/reddit` - Get a random post from the specified subreddit.
-- `/weather` - Get the current weather for the specified city.
-- `/news` - Get a trending news article from the specified country.
+- `/reddit` — get a random post from a specified subreddit.
+- `/weather` — get the current weather for a specified city.
+- `/news` — get a trending news article from a specified country.
 
 ### Utility Commands
 
-- `/help` - Show a list of all commands.
-- `/info` - Show information about the bot.
-- `/invite` - Get an invite link for the bot.
-- `/ping` - Check the bot's latency.
+- `/help` — show a list of all commands.
+- `/info` — show information about the bot.
+- `/invite` — get an invite link for the bot.
+- `/ping` — check the bot's latency.
 
-## History
+### Self-Hosting
 
-This project was originally created in 2018 as a way to learn Python and as such it was made with `Discord.py`. I have since rewritten it in `Discord.js` due to it's more active development and better documentation. The original repo can be found here: [DavisStanko/robot](https://github.com/DavisStanko/robot)
-
-## Self Hosting
-
-If you'd like to run your own instance of the bot, you can fork this repository and host it yourself. The bot can be run using PM2 for process management:
+To run your own instance, fork this repository. Run the bot with PM2 for process management:
 
 1. Install PM2 globally:
 
@@ -63,19 +61,18 @@ pm2 restart discord-bot # Restart the bot
 pm2 stop discord-bot    # Stop the bot
 ```
 
-Feel free to fork this project and make your own modifications. Contributions are welcome through pull requests!
+Contributions are welcome through pull requests.
 
-### Bot Stats API
+## How it works
 
-When the bot is running, it also hosts a small web server on port 3001.
-You can access bot statistics (such as the number of servers and users) by making a GET request to:
+This project began in 2018, as a way to learn Python. It was built with `Discord.py`. It has since been rewritten in `Discord.js`, due to more active development and better documentation. The original repository is at [DavisStanko/robot](https://github.com/DavisStanko/robot).
 
+While running, the bot also hosts a small web server on port 3001. This server exposes bot statistics, like the number of servers and users, as a JSON object. Access it with a GET request to:
+
+```
 http://<your-server-ip>:3001/botstats
-
-This endpoint returns a JSON object.
+```
 
 ## License
 
-This project is licensed under the [GPL-3.0](LICENSE.md)
-GNU General Public License - see the [LICENSE.md](LICENSE.md) file for
-details.
+This project uses the GPL-3.0 license. See the [LICENSE.md](LICENSE.md) file for details.
