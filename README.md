@@ -4,7 +4,9 @@ Versatile Discord bot with extensive commands for entertainment and utility. Fea
 
 Note: the official hosted version is no longer online. This repository is now maintained as an open-source project, for anyone who wants to host their own instance or learn from the codebase.
 
-![Botterfly screenshot](demo.png)
+<p align="center">
+  <img src="demo.png" alt="Botterfly screenshot" />
+</p>
 
 ## How to use
 
