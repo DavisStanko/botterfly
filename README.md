@@ -4,6 +4,8 @@ Versatile Discord bot with extensive commands for entertainment and utility. Fea
 
 Note: the official hosted version is no longer online. This repository is now maintained as an open-source project, for anyone who wants to host their own instance or learn from the codebase.
 
+![Botterfly screenshot](demo.png)
+
 ## How to use
 
 All commands are slash commands. Type `/` in a Discord chat to find them. Type `/help` to see a list of all commands and their usage.
