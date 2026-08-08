@@ -36,7 +36,7 @@ All commands are slash commands and can be found by typing `/` in the chat. Typi
 
 ## History
 
-This project was originally created in 2018 as a way to learn Python and as such it was made with `Discord.py`. I have since rewritten it in `Discord.js` due to it's more active development and better documentation. The original repo can be found here: [DavisStanko/Discord-Bot](https://github.com/DavisStanko/Discord-Bot)
+This project was originally created in 2018 as a way to learn Python and as such it was made with `Discord.py`. I have since rewritten it in `Discord.js` due to it's more active development and better documentation. The original repo can be found here: [DavisStanko/robot](https://github.com/DavisStanko/robot)
 
 ## Self Hosting
 
